@@ -19,10 +19,10 @@ example: `ssh-keygen -t rsa -C 'havs@nustechnolody.com'`
 - Config file `~/.ssh/config`:
 
   ```
-  `Host` github_havs => alias, đặt tùy thích, đặt gì thì khi clone code phải sử dụng như vậy
-    `HostName` github.com => domain thật sự của git server sử dụng
-    `User` git => mặc định, ko chỉnh sửa
-    `IdentityFile` ~/.ssh/havs/id_rsa_havs => file private key pair với public key đã đăng ký
+  Host github_havs => alias, đặt tùy thích, đặt gì thì khi clone code phải sử dụng như vậy
+    HostName github.com => domain thật sự của git server sử dụng
+    User git => mặc định, ko chỉnh sửa
+    IdentityFile ~/.ssh/havs/id_rsa_havs => file private key pair với public key đã đăng ký
   ```
 
 - Clone repo: `git clone <git-url>`

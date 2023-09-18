@@ -15,21 +15,39 @@
 
 - Add public key: https://github.com/settings/keys
 
-- Clone repo: git clone [git-url]
+- Config file `~/.ssh/config`:
+
+  ```
+  `Host` github_havs => alias, đặt tùy thích, đặt gì thì khi clone code phải sử dụng như vậy
+    `HostName` github.com => domain thật sự của git server sử dụng
+    `User` git => mặc định, ko chỉnh sửa
+    `IdentityFile` ~/.ssh/havs/id_rsa_havs => file private key pair với public key đã đăng ký
+  ```
+
+- Clone repo: `git clone <git-url>`
+example: `git clone git@github_havs:vosonha/RoR-Training.git`
+
+##### Configure multiple sss keys
+
+- Generate keys
+
+- Add public keys to github accounts
+
+- Config file `~/.ssh/config`, should create sub folder for each github account / project
 
 #### Working on branch
 
 - View branches and current branch: git branch
 
-- Create new branch: git checkout -b [branch name]
+- Create new branch: git checkout -b <branch name>
 
 - Push code:
 
-    + `git add [files]` or `git add .`
+    + `git add <files>` or `git add .`
 
-    + `git commit -m "[your message]"`
+    + `git commit -m "<your message>"`
 
-    + `git push [remote name] [local branch]:[remote branch]`
+    + `git push <remote name> <local branch>:<remote branch>`
 
         + git push: push to upstream
 
@@ -45,7 +63,7 @@
 
     - `git pull`
 
-    - `git fetch` -> `git merge [branch name]` or `git rebase [branch name]`
+    - `git fetch` -> `git merge <branch name>` or `git rebase <branch name>`
 
         + git rebase: sử  dụng trên nhánh private (làm 1 mình). Không sử dụng trên nhánh làm chung or nhánh làm một mình bà rebase báo conflict 2 lần.
 
@@ -64,9 +82,9 @@
 
         - Sửa file(s) bị conflict
 
-        - `git add [file(s)]`
+        - `git add <file(s)>`
 
-        - `git commit -m "[message]"`
+        - `git commit -m "<message>"`
 
         - `git push`
 
@@ -78,11 +96,11 @@
 
 - git checkout:
 
-    - Chuyển nhánh: `git check [tên nhánh]`
+    - Chuyển nhánh: `git check <tên nhánh>`
 
-    - Chuyển version file: `git check [commit id] [tên file]`
+    - Chuyển version file: `git check <commit id> <tên file>`
 
-    - Tạo nhánh mới: `git check -b [tên nhánh]`
+    - Tạo nhánh mới: `git check -b <tên nhánh>`
 
 - git status: provide info: current branch, file untracked, file modify, file ready to commit, conflict.
 
@@ -96,9 +114,9 @@
 
 - git config
 
-  `git config --local user.name [name]`
+  `git config --local user.name <name>`
 
-  `git config --global user.email [email]`
+  `git config --global user.email <email>`
 
 #### GUI tool
 
@@ -111,19 +129,3 @@
   + commit 1 phần file hay revert change dễ dàng
 
 - gitk: view history
-
-
-#### Configure multiple sss keys
-
-- Generate keys
-
-- Add public keys to github accounts
-
-- Config file `~/.ssh/config`:
-
-  ```
-  Host github-nhannm.com => alias, đặt tùy thích, đặt gì thì khi clone code phải sử dụng như vậy
-    HostName github.com => domain thật sự của git server sử dụng
-    User git => mặc định, ko chỉnh sửa
-    IdentityFile ~/.ssh/nhannm/id_rsa => file private key pair với public key đã đăng ký
-  ```

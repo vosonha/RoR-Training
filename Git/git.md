@@ -12,6 +12,7 @@
 #### Clone repo
 
 - Generate ssh key: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+example: `ssh-keygen -t rsa -C 'havs@nustechnolody.com'`
 
 - Add public key: https://github.com/settings/keys
 
@@ -37,9 +38,9 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
 #### Working on branch
 
-- View branches and current branch: git branch
+- View branches and current branch: `git branch`
 
-- Create new branch: git checkout -b <branch name>
+- Create new branch: `git checkout -b <branch name>`
 
 - Push code:
 
@@ -96,11 +97,11 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
 - git checkout:
 
-    - Chuyển nhánh: `git check <tên nhánh>`
+    - Chuyển nhánh: `git checkout <branch name>`
 
-    - Chuyển version file: `git check <commit id> <tên file>`
+    - Chuyển version file: `git checkout <commit id>|<branch name> <file name>`
 
-    - Tạo nhánh mới: `git check -b <tên nhánh>`
+    - Tạo nhánh mới: `git check -b <new branch name>`
 
 - git status: provide info: current branch, file untracked, file modify, file ready to commit, conflict.
 

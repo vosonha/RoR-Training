@@ -38,7 +38,7 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
 #### Working on branch
 
-- View branches and current branch: `git branch`
+- View local branches and current branch: `git branch`
 
 - Create new branch: `git checkout -b <branch name>`
 
@@ -46,7 +46,7 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
     + `git add <files>` or `git add .`
 
-    + `git commit -m "<your message>"`
+    + `git commit -m '<your message>'`
 
     + `git push <remote name> <local branch>:<remote branch>`
 
@@ -67,6 +67,8 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
     - `git fetch` -> `git merge <branch name>` or `git rebase <branch name>`
 
         + git rebase: sử  dụng trên nhánh private (làm 1 mình). Không sử dụng trên nhánh làm chung or nhánh làm một mình bà rebase báo conflict 2 lần.
+
+- Differences Between Git Merge and Rebase: https://blog.git-init.com/differences-between-git-merge-and-rebase-and-why-you-should-care/
 
 - Resolve conflict:
     - Lựa chọn:
@@ -91,7 +93,9 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
 #### Common commands
 
-- `git stash`: tạm thời bỏ những thay đổi để chuyển nhánh. Khi lấy lại thay đổi dùng `git stash apply`
+- `git stash`: tạm thời bỏ những thay đổi lên stash để chuyển nhánh.
+    + `git stash list`: xem danh sách stashed
+    + `git stash apply`: lấy lại thay đổi, vẫn giữ lại stash
 
 - `git pull` = `git fetch` + `git merge`
 
@@ -101,7 +105,7 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
     - Chuyển version file: `git checkout <commit id>|<branch name> <file name>`
 
-    - Tạo nhánh mới: `git check -b <new branch name>`
+    - Tạo nhánh mới: `git checkout -b <new branch name>`
 
 - git status: provide info: current branch, file untracked, file modify, file ready to commit, conflict.
 

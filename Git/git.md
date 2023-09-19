@@ -83,23 +83,25 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
     - Giải quyết:
 
-        - Sửa file(s) bị conflict
+            - Sửa file(s) bị conflict
 
-        - `git add <file(s)>`
+            - git add <file(s)>
 
-        - `git commit -m "<message>"`
+            - git commit -m <message>'
 
-        - `git push`
+            - git push
 
 #### Common commands
 
 - `git stash`: tạm thời bỏ những thay đổi lên stash để chuyển nhánh.
     + `git stash list`: xem danh sách stashed
-    + `git stash apply`: lấy lại thay đổi, vẫn giữ lại stash
+    + `git stash apply`: apply thay đổi, vẫn giữ lại trên stash
+    + `git stash pop`: apply and pop thay đổi
+https://git-scm.com/docs/git-stash#_description
 
 - `git pull` = `git fetch` + `git merge`
 
-- git checkout:
+- `git checkout`:
 
     - Chuyển nhánh: `git checkout <branch name>`
 
@@ -107,9 +109,9 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
     - Tạo nhánh mới: `git checkout -b <new branch name>`
 
-- git status: provide info: current branch, file untracked, file modify, file ready to commit, conflict.
+- `git status`: provide info: current branch, file untracked, file modify, file ready to commit, conflict.
 
-- git reset:
+- `git reset`:
 
     - mix (default): bỏ lịch sử, giữ code, ko add changes vào index
 
@@ -117,7 +119,7 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
     - hard: bỏ code, bỏ lịch sử
 
-- git config
+- `git config`
 
   `git config --local user.name <name>`
 

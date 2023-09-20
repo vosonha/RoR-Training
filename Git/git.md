@@ -30,11 +30,11 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
 ##### Configure multiple sss keys
 
-- Generate keys
+- Generate keys => should create sub folder for each key
 
 - Add public keys to github accounts
 
-- Config file `~/.ssh/config`, should create sub folder for each github account / project
+- Config file `~/.ssh/config`
 
 #### Working on branch
 
@@ -50,15 +50,15 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
     + `git push <remote name> <local branch>:<remote branch>`
 
-        + git push: push to upstream
+        + `git push`: push to upstream
 
-        + git push github: push to remote branch on remote github
+        + `git push origin`: push to remote branch on remote origin
 
-        + git push github feature2
+        + `git push origin feature2`: push local branch feature2 to remote branch feature2 on remote origin
 
-        + git push github feature1:feature2 => ko khuyến khích
+        + `git push origin feature1:feature2`: push local branch feature1 to remote branch feature2 on remote origin => ko khuyến khích
 
-        + git push github :feature1 => delete remote feature1
+        + `git push origin :feature1` => delete remote branch feature1 on remote origin
 
 - Pull code:
 
@@ -70,7 +70,7 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 
 - Differences Between Git Merge and Rebase: https://blog.git-init.com/differences-between-git-merge-and-rebase-and-why-you-should-care/
 
-- Resolve conflict:
+- Resolve conflict (conflict xảy ra khi merge/rebase mà có code trong 1 file khác version):
     - Lựa chọn:
 
             - Bỏ code mình (1)
@@ -94,9 +94,9 @@ example: `git clone git@github_havs:vosonha/RoR-Training.git`
 #### Common commands
 
 - `git stash`: tạm thời bỏ những thay đổi lên stash để chuyển nhánh.
-    + `git stash list`: xem danh sách stashed
-    + `git stash apply`: apply thay đổi, vẫn giữ lại trên stash
-    + `git stash pop`: apply and pop thay đổi
+  + `git stash list`: view stashed list
+  + `git stash apply`: apply thay đổi, vẫn giữ lại code changes trên stash
+  + `git stash pop`: apply and pop code change trên stash
 https://git-scm.com/docs/git-stash#_description
 
 - `git pull` = `git fetch` + `git merge`
@@ -113,17 +113,22 @@ https://git-scm.com/docs/git-stash#_description
 
 - `git reset`:
 
-    - mix (default): bỏ lịch sử, giữ code, ko add changes vào index
+    - `--mix` (default): bỏ lịch sử, giữ code, ko add changes vào index
 
-    - soft: bỏ lịch sử, giữ code
+    - `--soft`: bỏ lịch sử, giữ code
 
-    - hard: bỏ code, bỏ lịch sử
+    - `--hard`: bỏ code, bỏ lịch sử
 
 - `git config`
 
-  `git config --local user.name <name>`
+  - `git config --local user.name <name>`
 
-  `git config --global user.email <email>`
+  - `git config --global user.email <email>`
+
+- `git remote`
+  + `git remote -v`: view remote list
+  + `git remote remove <remote name>`: remove remote
+  + `git remote add <remote name> git@alias_name:git_repo_path`: add remote
 
 #### GUI tool
 

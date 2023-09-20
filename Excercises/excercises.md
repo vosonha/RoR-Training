@@ -9,7 +9,7 @@
 **Calculator**:
 
 <picture>
-  <img src="./calculator.png">
+  <img src="./calculator.png" width="200" height="250">
 </picture>
 
 

@@ -1,6 +1,6 @@
 # Synthetic Exercise
 
-Viết 1 class tên là Person và dùng class này cho những bài tập sau:
+Viết 1 class tên là `Person` và dùng class này cho những bài tập sau:
 
 1. Mỗi Person có 2 instance variable là `name` và `age`. Tạo setter và getter cho `name` và `age`
 

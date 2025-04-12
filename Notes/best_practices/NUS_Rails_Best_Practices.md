@@ -3,49 +3,55 @@
 # Rails Best Practices
 
 ### Table of Contents
-* [1. Model](#1)
-* [2. Controller](#2)
-* [3. View](#3)
-* [4. Unit test](#4)
-* [5. Common](#5)
+
+- [1. Model](#1)
+- [2. Controller](#2)
+- [3. View](#3)
+- [4. Unit test](#4)
+- [5. Common](#5)
 
 ### <span id="1"></span>1. Model
-* Use named scope instead of using where everywhere
-* Always use lambda for named scope
+
+- Use named scope instead of using where everywhere
+- Always use lambda for named scope
 
   **Example:**
+
   ```ruby
   scope :today, → { where(published_date: Date.today) }
   instead of:
   scope :today, where(published_date: Date.today))
   ```
 
-* Always create validations if any. Don't rely on client-side validations
-* Always reject SQL injection
+- Always create validations if any. Don't rely on client-side validations
+- Always reject SQL injection
 
   **Example:**
+
   ```ruby
   User.where("name = ?", params[:name])
   instead of:
   User.where("name = '#{params[:name]}'")
   ```
 
-* Always create needed indexes to improve performance
-* Use seeds.rb instead of migration to create seed data
-* Use “includes” to prevent N+1 queries
-* Use “size” instead of “count”
-* Use “.find_each” instead of “.all.each”. “.find_each” split pulling data query to multiple times, 1000 (default) records each time. This is called batch finder
-* Only select needed fields instead of select all (SELECT * FROM...)
-* Avoid using of raw SQL inside Rails
-* Always add default value for Boolean attributes
+- Always create needed indexes to improve performance
+- Use seeds.rb instead of migration to create seed data
+- Use “includes” to prevent N+1 queries
+- Use “size” instead of “count”
+- Use “.find_each” instead of “.all.each”. “.find_each” split pulling data query to multiple times, 1000 (default) records each time. This is called batch finder
+- Only select needed fields instead of select all (SELECT \* FROM...)
+- Avoid using of raw SQL inside Rails
+- Always add default value for Boolean attributes
 
 ### <span id="2"></span>2. Controller
-* Controller should be lightweight, complex logic should be moved to service layer
-* Should follow RESTful as most as possible
-* Create separated controllers with namespace (e.g: api/v1) for API
-* Use before_filter to do a repeat task
+
+- Controller should be lightweight, complex logic should be moved to service layer
+- Should follow RESTful as most as possible
+- Create separated controllers with namespace (e.g: api/v1) for API
+- Use before_filter to do a repeat task
 
   **Example:**
+
   ```ruby
   class PostsController < ApplicationController
     before_filter :get_post, :only => [:edit, :update, :destroy]
@@ -80,70 +86,71 @@
   end
   ```
 
-* Don't modify the params hash. The params hash contains all the data that was submitted from a request. If you modify it, later code won't have access to it. Instead, copy the params hash and modify the copy.
-
+- Don't modify the params hash. The params hash contains all the data that was submitted from a request. If you modify it, later code won't have access to it. Instead, copy the params hash and modify the copy.
 
 ### <span id="3"></span>3. View
-* Use partials instead of a fat view
-* Data that a partial needs should be sent to it as parameters instead of using instance variable (@user)
-* Don't use queries in views
-* Limit of using inline js, css
-* Use js-routes gem to create path instead of using hardcoded path
-* Use i18n-js gem to do translation in js
-* Always use I18n instead of hardcoded texts
-* When using theme, use 2-3 css files instead of only application.css to prevent IE class count limit in a css file
-* Any time a form is shown on a page, the first or "most important" field should automatically have the focus
+
+- Use partials instead of a fat view
+- Data that a partial needs should be sent to it as parameters instead of using instance variable (@user)
+- Don't use queries in views
+- Limit of using inline js, css
+- Use js-routes gem to create path instead of using hardcoded path
+- Use i18n-js gem to do translation in js
+- Always use I18n instead of hardcoded texts
+- When using theme, use 2-3 css files instead of only application.css to prevent IE class count limit in a css file
+- Any time a form is shown on a page, the first or "most important" field should automatically have the focus
 
 ### <span id="4"></span>4. Unit test
-* Be clear about what method you are describing
-For instance, use the Ruby documentation convention of . (or ::) when referring to a class method's name and # when referring to an instance method's name.
 
-```
-#BAD
-describe 'the authenticate method for User' do
-describe 'if the user is an admin' do
+- Be clear about what method you are describing
+  For instance, use the Ruby documentation convention of . (or ::) when referring to a class method's name and # when referring to an instance method's name.
 
-#GOOD
-describe '.authenticate' do
-describe '#admin?' do
-```
+  ```
+  #BAD
+  describe 'the authenticate method for User' do
+  describe 'if the user is an admin' do
 
-* Use contexts
-Contexts are a powerful method to make your tests clear and well organized. In the long term this practice will keep tests easy to read.
+  #GOOD
+  describe '.authenticate' do
+  describe '#admin?' do
+  ```
 
-```
-#BAD
-it 'has 200 status code if logged in' do
-  expect(response).to respond_with 200
-end
-it 'has 401 status code if not logged in' do
-  expect(response).to respond_with 401
-end
+- Use contexts
+  Contexts are a powerful method to make your tests clear and well organized. In the long term this practice will keep tests easy to read.
 
-#GOOD
-context 'when logged in' do
-  it { is_expected.to respond_with 200 }
-end
-context 'when logged out' do
-  it { is_expected.to respond_with 401 }
-end
-```
+  ```
+  #BAD
+  it 'has 200 status code if logged in' do
+    expect(response).to respond_with 200
+  end
+  it 'has 401 status code if not logged in' do
+    expect(response).to respond_with 401
+  end
 
-* Keep your description short
-A spec description should never be longer than 40 characters. If this happens you should split it using a context.
+  #GOOD
+  context 'when logged in' do
+    it { is_expected.to respond_with 200 }
+  end
+  context 'when logged out' do
+    it { is_expected.to respond_with 401 }
+  end
+  ```
 
-```
-#BAD
-it 'has 422 status code if an unexpected params will be added' do
+- Keep your description short
+  A spec description should never be longer than 40 characters. If this happens you should split it using a context.
 
-#GOOD
-context 'when not valid' do
-  it { is_expected.to respond_with 422 }
-end
-```
+  ```
+  #BAD
+  it 'has 422 status code if an unexpected params will be added' do
 
-* Single expectation test
-The 'one expectation' tip is more broadly expressed as 'each test should make only one assertion'. This helps you on finding possible errors, going directly to the failing test, and to make your code readable.
+  #GOOD
+  context 'when not valid' do
+    it { is_expected.to respond_with 422 }
+  end
+  ```
+
+- Single expectation test
+  The 'one expectation' tip is more broadly expressed as 'each test should make only one assertion'. This helps you on finding possible errors, going directly to the failing test, and to make your code readable.
 
 In isolated unit specs, you want each example to specify one (and only one) behavior. Multiple expectations in the same example are a signal that you may be specifying multiple behaviors.
 
@@ -161,46 +168,46 @@ it 'creates a resource' do
 end
 ```
 
-* Test all possible cases
-* Expect vs Should syntax
-On new projects always use the expect syntax.
-* Use subject
-If you have several tests related to the same subject use subject{} to DRY them up.
+- Test all possible cases
+- Expect vs Should syntax
+  On new projects always use the expect syntax.
+- Use subject
+  If you have several tests related to the same subject use subject{} to DRY them up.
 
-```
-#BAD
-it { expect(assigns('message')).to match /it was born in Belville/ }
+  ```
+  #BAD
+  it { expect(assigns('message')).to match /it was born in Belville/ }
 
-#GOOD
-subject { assigns('message') }
-it { is_expected.to match /it was born in Billville/ }
-```
+  #GOOD
+  subject { assigns('message') }
+  it { is_expected.to match /it was born in Billville/ }
+  ```
 
-* Use let and let!
-When you have to assign a variable instead of using a before block to create an instance variable, use let. Using let the variable lazy loads only when it is used the first time in the test and get cached until that specific test is finished. A really good and deep description of what let does can be found in this stackoverflow answer.
+- Use let and let!
+  When you have to assign a variable instead of using a before block to create an instance variable, use let. Using let the variable lazy loads only when it is used the first time in the test and get cached until that specific test is finished. A really good and deep description of what let does can be found in this stackoverflow answer.
 
-```
-#BAD
-describe '#type_id' do
-  before { @resource = FactoryGirl.create :device }
-  before { @type     = Type.find @resource.type_id }
+  ```
+  #BAD
+  describe '#type_id' do
+    before { @resource = FactoryGirl.create :device }
+    before { @type     = Type.find @resource.type_id }
 
-  it 'sets the type_id field' do
-    expect(@resource.type_id).to equal(@type.id)
+    it 'sets the type_id field' do
+      expect(@resource.type_id).to equal(@type.id)
+    end
   end
-end
 
-#GOOD
-describe '#type_id' do
-  let(:resource) { FactoryGirl.create :device }
-  let(:type)     { Type.find resource.type_id }
+  #GOOD
+  describe '#type_id' do
+    let(:resource) { FactoryGirl.create :device }
+    let(:type)     { Type.find resource.type_id }
 
-  it 'sets the type_id field' do
-    expect(resource.type_id).to equal(type.id)
+    it 'sets the type_id field' do
+      expect(resource.type_id).to equal(type.id)
+    end
   end
-end
 
-```
+  ```
 
 Use let to initialize actions that are lazy loaded to test your specs.
 
@@ -218,10 +225,10 @@ context 'when updates a not existing property value' do
 end
 ```
 
-* Create only the data you need
-* Use factories and not fixtures
-* Test what you see
-Deeply test your models and your application behaviour (integration tests). Do not add useless complexity testing controllers.
+- Create only the data you need
+- Use factories and not fixtures
+- Test what you see
+  Deeply test your models and your application behaviour (integration tests). Do not add useless complexity testing controllers.
 
 When I first started testing my apps I was testing controllers, now I don't. Now I only create integration tests using RSpec and Capybara. Why? Because I truly believe that you should test what you see and because testing controllers is an extra step you don't need. You'll find out that most of your tests go into the models and that integration tests can be easily grouped into shared examples, building a clear and readable test suite.
 
@@ -229,9 +236,9 @@ This is an open debate in the Ruby community and both sides have good arguments 
 
 Both are wrong. You can easily cover all use cases (why shouldn't you?) and you can run single file specs using automated tools like Guard. In this way you will run only the specs you need to test blazing fast without stopping your flow.
 
-* Automatic tests with guard
-* Stubbing HTTP requests
-Sometimes you need to access external services. In these cases you can't rely on the real service but you should stub it with solutions like webmock.
+- Automatic tests with guard
+- Stubbing HTTP requests
+  Sometimes you need to access external services. In these cases you can't rely on the real service but you should stub it with solutions like webmock.
 
 ```
 context "with unauthorized access" do
@@ -244,19 +251,20 @@ context "with unauthorized access" do
 end
 ```
 
-* Useful formatter
-Use a formatter that can give you useful information about the test suite. I personally find fuubar really nice. To make it work add the gem and set fuubar as default formatter in your Guardfile.
+- Useful formatter
+  Use a formatter that can give you useful information about the test suite. I personally find fuubar really nice. To make it work add the gem and set fuubar as default formatter in your Guardfile.
 
 ### <span id="5"></span>5. Common
-* Never use magic numbers. Use constants, configs instead
-* Use I18n instead of hardcode texts
-* Don't use “rescue Exception => e”, use “rescue StandardError => e” or “rescue => e”  instead
-* Remove unused code instead of making it to be a comment
-* Prevent duplicated code: use functions instead of copying and pasting code
-* Use meaningful names for variables, functions instead of a, b...
-* Use Time.zone.now instead of Time.now. The ActiveSupport method Time.zone.now should be used in place of the Ruby method Time.now to pickup the local time zone.
-* Several blocks of very similar code should be combined into common functions.
-* Use another has_many associations to load only proper fields for Object which have alot of fields, so we can use include easier:
+
+- Never use magic numbers. Use constants, configs instead
+- Use I18n instead of hardcode texts
+- Don't use “rescue Exception => e”, use “rescue StandardError => e” or “rescue => e” instead
+- Remove unused code instead of making it to be a comment
+- Prevent duplicated code: use functions instead of copying and pasting code
+- Use meaningful names for variables, functions instead of a, b...
+- Use Time.zone.now instead of Time.now. The ActiveSupport method Time.zone.now should be used in place of the Ruby method Time.now to pickup the local time zone.
+- Several blocks of very similar code should be combined into common functions.
+- Use another has_many associations to load only proper fields for Object which have alot of fields, so we can use include easier:
 
 ```
   class Location < ActiveRecord::Base
@@ -269,6 +277,7 @@ Use a formatter that can give you useful information about the test suite. I per
   ### Use Location.includes(:listings_proper).all instead of Location.includes(:listings).all
 
 ```
+
 <table width="100%" cellpadding="4" cellspacing="0"><colgroup><col width="256*"></colgroup></table>
 <table width="100%" cellpadding="4" cellspacing="0" style="display: table">
   <colgroup><col width="256*"></colgroup>

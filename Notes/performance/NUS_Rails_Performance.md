@@ -3,13 +3,13 @@
 # Rails Performance - Problems and Solutions
 
 ### Table of Contents
-* [1. Tips & Tricks](#1)
-* [2. Advanced techniques](#2)
-* [3. Tools](#3)
 
-
+- [1. Tips & Tricks](#1)
+- [2. Advanced techniques](#2)
+- [3. Tools](#3)
 
 ### <span id='1'></span>1. Tips & Tricks
+
 #### Prevent heavy CSS + JS
 
 ```html
@@ -21,15 +21,16 @@
 </body>
 ```
 
-* Load JS before closing **&lt;/body&gt;**
-* Load javascript asynchronously with async attribute
+- Load JS before closing **&lt;/body&gt;**
+- Load javascript asynchronously with async attribute
 
   ```html
   <!-- HTML 5 only -->
-  <script src=“” async=“true”></script>
+  <script src="“”" async="“true”"></script>
   ```
 
-* Load javascript asynchronously with [headjs](http://headjs.com/)
+- Load javascript asynchronously with [headjs](http://headjs.com/)
+
 ###### Note: Attention: inline JS?
 
 #### N+1 query
@@ -58,31 +59,34 @@ end
 
 #### Static assets
 
-* Different hosting server for static assets (allow parallel downloads)
+- Different hosting server for static assets (allow parallel downloads)
 
 ```
 config.action_controller.asset_host = "example.com"
 ```
 
-* CDN (AWS CloudFront, RackSpace CloudFiles)
-![CDN.jpg](CDN.jpg)
+- CDN (AWS CloudFront, RackSpace CloudFiles)
+  ![CDN.jpg](CDN.jpg)
 
 #### DB Indexes
-* Appropriate indexes give 100x performance gain on **large tables!**
-* Don’t add too many, increase DB size and affect performance when updating/inserting!
-* Candidates: foreign key, attribute in WHERE condition
+
+- Appropriate indexes give 100x performance gain on **large tables!**
+- Don’t add too many, increase DB size and affect performance when updating/inserting!
+- Candidates: foreign key, attribute in WHERE condition
 
 #### Background worker
-* Delayed_job, Sidekiq, Resque
+
+- Delayed_job, Sidekiq, Resque
 
 ```
 "What if one Sidekiq process could do the work of 20 Resque or DelayedJob processes?"!
 ```
 
-* Always put time-consuming tasks in background. Ex: sending email, crawling data
+- Always put time-consuming tasks in background. Ex: sending email, crawling data
 
 #### Faster JSON renderer
-* Using **"oj"** gem
+
+- Using **"oj"** gem
 
 ```
 person = Person.first!
@@ -109,19 +113,21 @@ end
 ```
 
 #### Caching
-* Use faster cache store: *Redis* or *Memcached*
 
-* Fragment caching
+- Use faster cache store: _Redis_ or _Memcached_
+
+- Fragment caching
 
 ```html
 <% cache(key, :expires_in => 1.hour) do %>!
-  <!-- content -->!
-<% end %>
+<!-- content -->! <% end %>
 ```
 
 ### <span id='2'></span>2. Advanced Techniques
+
 #### JS optimization
-* Render block of HTML instead of insert individual elements
+
+- Render block of HTML instead of insert individual elements
 
 ```
 #Bad
@@ -137,7 +143,7 @@ for (var i=0; i<1000; i++){
 $(“#test”).append(html);
 ```
 
-* Remove ghost views (**Backbone**)
+- Remove ghost views (**Backbone**)
 
 ```
 # Bad
@@ -156,9 +162,10 @@ var view = new MyView();
 ```
 
 ### <span id='3'></span>3. Tools
-* [Google PageSpeed](https://developers.google.com/speed/pagespeed/)
-* [Yahoo YSlow](https://developer.yahoo.com/yslow/)
-* [NewRelic](http://newrelic.com/)
+
+- [Google PageSpeed](https://developers.google.com/speed/pagespeed/)
+- [Yahoo YSlow](https://developer.yahoo.com/yslow/)
+- [NewRelic](http://newrelic.com/)
 
 <table width="100%" cellpadding="4" cellspacing="0"><colgroup><col width="256*"></colgroup></table>
 <table width="100%" cellpadding="4" cellspacing="0" style="display: table">

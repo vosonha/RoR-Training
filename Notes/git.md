@@ -32,22 +32,22 @@
 
 - Lựa chọn:
 
-```bash
-  - Bỏ code mình (1)
-  - Bỏ code người ta (2)
-  - Giữ cả 2 (có thể modify) (3)
-```
+  ```bash
+    - Bỏ code mình (1)
+    - Bỏ code người ta (2)
+    - Giữ cả 2 (có thể modify) (3)
+  ```
 
 => Đọc code tự tin thì chọn (1) or (2) or (3). Ko tự tin thì kiếm người tạo ra commit conflict với mình để discuss và giải quyết.
 
 - Giải quyết:
 
-```bash
-  - Sửa file(s) bị conflict
-  - git add <file(s)>
-  - git commit -m <message>
-  - git push
-```
+  ```bash
+    - Sửa file(s) bị conflict
+    - git add <file(s)>
+    - git commit -m <message>
+    - git push
+  ```
 
 ## Commands
 
@@ -55,28 +55,45 @@
 
 - Generate ssh key: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 
-```bash
-ssh-keygen -t ed25519 -C "your_email@example.com"
-```
+  ```bash
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+  ```
 
-- Add public key: https://github.com/settings/keys
+- Add public key to github: https://github.com/settings/keys
 
 - Config file `~/.ssh/config`:
 
-```
-Host github_havs => alias, đặt tùy thích, đặt gì thì khi clone code phải sử dụng như vậy
-  HostName github.com => domain thật sự của git server sử dụng
-  User git => mặc định, ko chỉnh sửa
-  IdentityFile ~/.ssh/havs/id_rsa_havs => file private key pair với public key đã đăng ký
-```
+  ```
+  Host github_havs => alias, đặt tùy thích, đặt gì thì khi clone code phải sử dụng như vậy
+    HostName github.com => domain thật sự của git server sử dụng
+    User git => mặc định, ko chỉnh sửa
+    IdentityFile ~/.ssh/havs/id_rsa_havs => file private key pair với public key đã đăng ký
+  ```
 
 - Clone repo: `git clone <git-url>`
 
-```bash
-git clone git@github_havs:vosonha/RoR-Training.git
-```
+  ```bash
+  git clone git@github_havs:vosonha/RoR-Training.git
+  ```
 
-### Configure multiple sss keys
+- Git config user name and email:
+
+  - Global config: áp dụng cho tất cả các repo trên máy tính.
+
+    ```bash
+    git config --global user.name name
+    git config --global user.email email
+    ```
+
+  - Local config: chỉ áp dụng cho repo hiện tại.
+    ```bash
+    git config --local user.name name
+    git config --local user.email email
+    ```
+
+- View config: `git config --list`
+
+### Configure multiple ssh keys
 
 - Generate keys => should create sub folder for each key
 
